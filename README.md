@@ -1,4 +1,8 @@
-# ngx-treeview [![Build Status](https://travis-ci.org/leovo2708/ngx-treeview.svg?branch=master)](https://travis-ci.org/leovo2708/ngx-treeview) [![npm version](https://badge.fury.io/js/ngx-treeview.svg)](https://badge.fury.io/js/ngx-treeview)
+> [!WARNING]
+> This library is a fork of [ngx-treeview](https://github.com/leovo2708/ngx-treeview) that is compatible with Angular 16. This fork does not have the intention to continue the support of this library and comes with no guarantees. Please use at your own discretion.
+
+
+# ngx-treeview
 
 An Angular treeview component with checkbox
 
