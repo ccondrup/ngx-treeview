@@ -27,7 +27,7 @@
     "recursive",
     "angular tree component"
   ],
-  "author": "Samotics <info@gmail.com>",
+  "author": "Samotics <info@samotics.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/semioticlabs/ngx-treeview.git"
