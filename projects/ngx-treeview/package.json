@@ -1,6 +1,6 @@
 {
-  "name": "ngx-treeview",
-  "version": "17.0.2",
+  "name": "@ccondrup/ngx-treeview",
+  "version": "17.0.3",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "keywords": [
@@ -31,5 +31,7 @@
   },
   "dependencies": {
     "tslib": "^2.6.3"
-  }
+  },
+  "homepage": "https://github.com/ccondrup/ngx-treeview#readme",
+  "main": "src/public-api.ts"
 }
