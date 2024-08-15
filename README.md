@@ -7,7 +7,7 @@ package.json:
 ```
 {
   "dependencies": {
-    "@ccondrup/ngx-treeview": "~17.0.6",
+    "@ccondrup/ngx-treeview": "~17.0.7",
   }
 }
 ```

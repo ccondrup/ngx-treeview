@@ -1,6 +1,21 @@
-# ⚠️ Warning
-This library is a fork of [ngx-treeview](https://github.com/leovo2708/ngx-treeview) that is compatible with Angular 16. This fork does not have the intention to continue the support of this library and comes with no guarantees. Please use at your own discretion.
+Another fork, for Angular 17+ compatibility
+- comes with no guarantees, use at your own discretion.
+- forked from https://github.com/semioticlabs/ngx-treeview
+- orginally https://github.com/leovo2708/ngx-treeview
 
+package.json:
+```
+{
+  "dependencies": {
+    "@ccondrup/ngx-treeview": "~17.0.7",
+  }
+}
+```
+
+
+### Original Readme:
+
+<details>
 
 # ngx-treeview
 
@@ -180,3 +195,4 @@ See example 4 & 5.
 ## Contributing
 
 I am very appreciate for your ideas, proposals and found bugs which you can leave in github issues. Thanks in advance!
+</details>
