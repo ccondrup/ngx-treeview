@@ -1,13 +1,12 @@
-import { Component, DebugElement, Injectable } from '@angular/core';
-import { TestBed, ComponentFixture, fakeAsync, tick, inject, waitForAsync } from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
+import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { BrowserModule, By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { slice } from 'lodash';
+import { fakeItemTemplate } from '../../testings/treeview-item-template.spec';
 import { expect, createGenericTestComponent } from '../../../testing';
 import { TreeviewConfig } from '../../models/treeview-config';
 import { TreeviewItemComponent } from '../treeview-item/treeview-item.component';
 import { TreeviewItem } from '../../models/treeview-item';
-import { fakeItemTemplate } from './treeview-item-template.spec';
 
 interface FakeData {
   item: TreeviewItem;
@@ -98,8 +97,8 @@ describe('TreeviewItemComponent', () => {
       tick();
       collapsedElement = fixture.debugElement.query(By.css('.fa'));
       const checkboxElements = fixture.debugElement.queryAll(By.css('.form-check-input'));
-      parentCheckbox = checkboxElements[0];
-      childrenCheckboxes = slice(checkboxElements, 1);
+      parentCheckbox = checkboxElements.shift();
+      childrenCheckboxes = checkboxElements;
     }));
 
     it('should work', () => {

@@ -1,4 +1,3 @@
-import { isBoolean, isNil, isString } from 'lodash';
 import { TreeviewHelper } from '../helpers/treeview-helper';
 
 export interface TreeviewSelection {
@@ -24,25 +23,25 @@ export class TreeviewItem {
   value: any;
 
   constructor(item: TreeItem, autoCorrectChecked = false) {
-    if (isNil(item)) {
+    if (!item) {
       throw new Error('Item must be defined');
     }
-    if (isString(item.text)) {
+    if (typeof item.text === 'string') {
       this.text = item.text;
     } else {
       throw new Error('A text of item must be string object');
     }
     this.value = item.value;
-    if (isBoolean(item.checked)) {
+    if (typeof item.checked === 'boolean') {
       this.checked = item.checked;
     }
-    if (isBoolean(item.collapsed)) {
+    if (typeof item.collapsed === 'boolean') {
       this.collapsed = item.collapsed;
     }
-    if (isBoolean(item.disabled)) {
+    if (typeof item.disabled !== 'boolean') {
       this.disabled = item.disabled;
     }
-    if (!isNil(item.children) && item.children.length > 0) {
+    if (item.children?.length > 0) {
       this.children = item.children.map(child => {
         if (this.disabled === true) {
           child.disabled = true;
@@ -76,7 +75,7 @@ export class TreeviewItem {
   setCheckedRecursive(value: boolean): void {
     if (!this.internalDisabled) {
       this.internalChecked = value;
-      if (!isNil(this.internalChildren)) {
+      if (this.internalChildren) {
         this.internalChildren.forEach(child => child.setCheckedRecursive(value));
       }
     }
@@ -89,7 +88,7 @@ export class TreeviewItem {
   set disabled(value: boolean) {
     if (this.internalDisabled !== value) {
       this.internalDisabled = value;
-      if (!isNil(this.internalChildren)) {
+      if (this.internalChildren) {
         this.internalChildren.forEach(child => child.disabled = value);
       }
     }
@@ -107,7 +106,7 @@ export class TreeviewItem {
 
   setCollapsedRecursive(value: boolean): void {
     this.internalCollapsed = value;
-    if (!isNil(this.internalChildren)) {
+    if (this.internalChildren) {
       this.internalChildren.forEach(child => child.setCollapsedRecursive(value));
     }
   }
@@ -118,11 +117,11 @@ export class TreeviewItem {
 
   set children(value: TreeviewItem[]) {
     if (this.internalChildren !== value) {
-      if (!isNil(value) && value.length === 0) {
+      if (value?.length === 0) {
         throw new Error('Children must be not an empty array');
       }
       this.internalChildren = value;
-      if (!isNil(this.internalChildren)) {
+      if (this.internalChildren) {
         let checked = null;
         this.internalChildren.forEach(child => {
           if (checked === null) {
@@ -142,7 +141,7 @@ export class TreeviewItem {
   getSelection(): TreeviewSelection {
     let checkedItems: TreeviewItem[] = [];
     let uncheckedItems: TreeviewItem[] = [];
-    if (isNil(this.internalChildren)) {
+    if (!this.internalChildren) {
       if (this.internalChecked) {
         checkedItems.push(this);
       } else {
@@ -166,7 +165,7 @@ export class TreeviewItem {
 
   private getCorrectChecked(): boolean {
     let checked: boolean = null;
-    if (!isNil(this.internalChildren)) {
+    if (this.internalChildren) {
       for (const child of this.internalChildren) {
         child.internalChecked = child.getCorrectChecked();
         if (checked === null) {

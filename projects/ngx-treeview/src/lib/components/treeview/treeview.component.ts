@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnChanges, TemplateRef, OnInit } from '@angular/core';
-import { isNil, includes } from 'lodash';
 import { TreeviewI18n } from '../../models/treeview-i18n';
 import { TreeviewItem, TreeviewSelection } from '../../models/treeview-item';
 import { TreeviewConfig } from '../../models/treeview-config';
@@ -70,7 +69,7 @@ export class TreeviewComponent implements OnChanges, OnInit {
   }
 
   get hasFilterItems(): boolean {
-    return !isNil(this.filterItems) && this.filterItems.length > 0;
+    return this.filterItems?.length > 0;
   }
 
   get maxHeight(): string {
@@ -84,7 +83,7 @@ export class TreeviewComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     const itemsSimpleChange = changes['items'];
-    if (!isNil(itemsSimpleChange) && !isNil(this.items)) {
+    if (itemsSimpleChange && this.items) {
       this.updateFilterItems();
       this.updateCollapsedOfAll();
       this.raiseSelectedChange();
@@ -144,7 +143,7 @@ export class TreeviewComponent implements OnChanges, OnInit {
   private generateSelection(): void {
     let checkedItems: TreeviewItem[] = [];
     let uncheckedItems: TreeviewItem[] = [];
-    if (!isNil(this.items)) {
+    if (this.items) {
       const selection = TreeviewHelper.concatSelection(this.items, checkedItems, uncheckedItems);
       checkedItems = selection['checked'];
       uncheckedItems = selection['unchecked'];
@@ -162,7 +161,7 @@ export class TreeviewComponent implements OnChanges, OnInit {
       const filterText = this.filterText.toLowerCase();
       this.items.forEach(item => {
         const newItem = this.filterItem(item, filterText);
-        if (!isNil(newItem)) {
+        if (newItem) {
           filterItems.push(newItem);
         }
       });
@@ -175,15 +174,15 @@ export class TreeviewComponent implements OnChanges, OnInit {
   }
 
   private filterItem(item: TreeviewItem, filterText: string): TreeviewItem {
-    const isMatch = includes(item.text.toLowerCase(), filterText);
+    const isMatch = item.text.toLowerCase().includes(filterText);
     if (isMatch) {
       return item;
     } else {
-      if (!isNil(item.children)) {
+      if (item.children) {
         const children: TreeviewItem[] = [];
         item.children.forEach(child => {
           const newChild = this.filterItem(child, filterText);
-          if (!isNil(newChild)) {
+          if (newChild) {
             children.push(newChild);
           }
         });

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { isNil } from 'lodash';
 import { TreeviewItem } from '../models/treeview-item';
 import { TreeviewComponent } from '../components/treeview/treeview.component';
 
@@ -12,7 +11,7 @@ export abstract class TreeviewEventParser {
 export class DefaultTreeviewEventParser extends TreeviewEventParser {
   getSelectedChange(component: TreeviewComponent): any[] {
     const checkedItems = component.selection.checkedItems;
-    if (!isNil(checkedItems)) {
+    if (checkedItems) {
       return checkedItems.map(item => item.value);
     }
 
@@ -29,11 +28,11 @@ export interface DownlineTreeviewItem {
 export class DownlineTreeviewEventParser extends TreeviewEventParser {
   getSelectedChange(component: TreeviewComponent): any[] {
     const items = component.items;
-    if (!isNil(items)) {
+    if (items) {
       let result: DownlineTreeviewItem[] = [];
       items.forEach(item => {
         const links = this.getLinks(item, null);
-        if (!isNil(links)) {
+        if (links) {
           result = result.concat(links);
         }
       });
@@ -45,7 +44,7 @@ export class DownlineTreeviewEventParser extends TreeviewEventParser {
   }
 
   private getLinks(item: TreeviewItem, parent: DownlineTreeviewItem): DownlineTreeviewItem[] {
-    if (!isNil(item.children)) {
+    if (item.children) {
       const link = {
         item,
         parent
@@ -53,7 +52,7 @@ export class DownlineTreeviewEventParser extends TreeviewEventParser {
       let result: DownlineTreeviewItem[] = [];
       item.children.forEach(child => {
         const links = this.getLinks(child, link);
-        if (!isNil(links)) {
+        if (links) {
           result = result.concat(links);
         }
       });

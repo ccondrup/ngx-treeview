@@ -1,4 +1,3 @@
-import { concat, isNil, pull } from 'lodash';
 import { TreeviewItem } from '../models/treeview-item';
 
 export const TreeviewHelper = {
@@ -10,7 +9,7 @@ export const TreeviewHelper = {
 };
 
 function findItem(root: TreeviewItem, value: any): TreeviewItem {
-  if (isNil(root)) {
+  if (!root) {
     return undefined;
   }
 
@@ -31,7 +30,7 @@ function findItem(root: TreeviewItem, value: any): TreeviewItem {
 }
 
 function findItemInList(list: TreeviewItem[], value: any): TreeviewItem {
-  if (isNil(list)) {
+  if (!list) {
     return undefined;
   }
 
@@ -46,7 +45,7 @@ function findItemInList(list: TreeviewItem[], value: any): TreeviewItem {
 }
 
 function findParent(root: TreeviewItem, item: TreeviewItem): TreeviewItem {
-  if (isNil(root) || isNil(root.children)) {
+  if (!root || !root.children) {
     return undefined;
   }
 
@@ -67,7 +66,7 @@ function findParent(root: TreeviewItem, item: TreeviewItem): TreeviewItem {
 function removeItem(root: TreeviewItem, item: TreeviewItem): boolean {
   const parent = findParent(root, item);
   if (parent) {
-    pull(parent.children, item);
+    parent.children = parent.children.filter((candidate) => candidate !== item);
     if (parent.children.length === 0) {
       parent.children = undefined;
     } else {
@@ -84,8 +83,8 @@ function concatSelection(items: TreeviewItem[], checked: TreeviewItem[], uncheck
   let uncheckedItems = [...unchecked];
   for (const item of items) {
     const selection = item.getSelection();
-    checkedItems = concat(checkedItems, selection.checkedItems);
-    uncheckedItems = concat(uncheckedItems, selection.uncheckedItems);
+    checkedItems = [...checkedItems, ...selection.checkedItems];
+    uncheckedItems = [...uncheckedItems, ...selection.uncheckedItems];
   }
   return {
     checked: checkedItems,

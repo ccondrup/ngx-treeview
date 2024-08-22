@@ -1,6 +1,6 @@
 {
   "name": "@ccondrup/ngx-treeview",
-  "version": "17.0.7",
+  "version": "17.0.8",
   "license": "MIT",
   "description": "An Angular treeview component with checkbox",
   "keywords": [
@@ -26,8 +26,7 @@
   },
   "peerDependencies": {
     "@angular/common": "^17.3.12",
-    "@angular/core": "^17.3.12",
-    "lodash": "^4.17.21"
+    "@angular/core": "^17.3.12"
   },
   "dependencies": {
     "tslib": "^2.6.3"

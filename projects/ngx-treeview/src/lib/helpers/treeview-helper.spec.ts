@@ -1,4 +1,3 @@
-import { cloneDeep } from 'lodash';
 import { TreeviewItem } from '../models/treeview-item';
 import { TreeviewHelper } from './treeview-helper';
 
@@ -98,7 +97,7 @@ describe('removeParent', () => {
   });
 
   it('should remove item & has correct checked', () => {
-    const root = cloneDeep(rootHasChildren);
+    const root = structuredClone(rootHasChildren);
     const parent = root;
     let item = root.children[1];
     expect(parent.children.length).toBe(2);
