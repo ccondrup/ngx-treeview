@@ -1,8 +1,9 @@
 import { Directive, Input, Output, HostBinding, HostListener, EventEmitter } from '@angular/core';
 
 @Directive({
-  selector: '[ngxDropdown]',
-  exportAs: 'ngxDropdown'
+    selector: '[ngxDropdown]',
+    exportAs: 'ngxDropdown',
+    standalone: false
 })
 export class DropdownDirective {
   toggleElement: any;
